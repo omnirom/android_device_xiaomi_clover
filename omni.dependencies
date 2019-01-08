@@ -1,0 +1,38 @@
+[
+ {
+   "repository": "android_kernel_xiaomi_clover",
+   "target_path": "kernel/xiaomi/clover"
+ },
+ {
+   "repository": "android_external_json-c",
+   "target_path": "external/json-c"
+ },
+  {
+    "remote": "omnirom",
+    "repository": "android_packages_apps_SnapdragonCamera2",
+    "target_path": "packages/apps/SnapdragonCamera2",
+    "revision": "android-9.0"
+  },
+  {
+    "remote": "omnirom",
+    "repository": "android_vendor_qcom_opensource_interfaces",
+    "target_path": "vendor/qcom/opensource/interfaces",
+    "revision": "android-9.0"
+  },
+  {
+    "remote": "omnirom",
+    "repository": "android_vendor_qcom_opensource_commonsys",
+    "target_path": "vendor/qcom/opensource/commonsys",
+    "revision": "android-9.0"
+  },
+  {
+    "remote": "omnirom",
+    "repository": "android_device_qcom_caf-sepolicy",
+    "target_path": "device/qcom/sepolicy",
+    "revision": "android-9.0"
+  },
+ {
+   "repository": "android_device_xiaomi_sdm660-common",
+   "target_path": "device/xiaomi/sdm660-common"
+ }
+]

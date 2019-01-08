@@ -24,15 +24,9 @@
 
 # Inherit the fusion-common definitions
 $(call inherit-product, device/xiaomi/sdm660-common/platform.mk)
+$(call inherit-product, vendor/omni/config/phone-xxxhdpi-3072-dalvik-heap.mk)
 
 DEVICE_PATH := device/xiaomi/clover
-
-#  Overlays
-DEVICE_PACKAGE_OVERLAYS += \
-    $(DEVICE_PATH)/overlay
-    
-# Device properties
-$(call inherit-product, $(DEVICE_PATH)/device_prop.mk)
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -44,11 +38,10 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
     $(DEVICE_PATH)/audio/audio_output_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_output_policy.conf \
     $(DEVICE_PATH)/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
     $(DEVICE_PATH)/audio/audio_platform_info_extcodec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_extcodec.xml \
-    $(DEVICE_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    $(DEVICE_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_policy_configuration.xml \
     $(DEVICE_PATH)/audio/audio_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/audio_tuning_mixer.txt \
     $(DEVICE_PATH)/audio/graphite_ipc_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/graphite_ipc_platform_info.xml \
     $(DEVICE_PATH)/audio/listen_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/listen_platform_info.xml \
@@ -59,6 +52,12 @@ PRODUCT_COPY_FILES += \
 # Init
 PRODUCT_PACKAGES += \
 	libinit_clover
+
+#power
+PRODUCT_PACKAGES += \
+    power.clover \
+    android.hardware.power@1.0-service \
+    android.hardware.power@1.0-impl
 
 # Sensors
 PRODUCT_COPY_FILES += \
@@ -90,16 +89,34 @@ PRODUCT_PACKAGES += \
 PRODUCT_AAPT_CONFIG := large
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-# Boot animation
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1200
+PRODUCT_PACKAGES += \
+    vndk-sp \
+    vndk-sp-28
+
+# Name space configuration file for non-enforcing VNDK
+#PRODUCT_PACKAGES += \
+    ld.config.vndk_lite.txt
+
+PRODUCT_PACKAGES += \
+    ld.config.txt
+
+PRODUCT_PACKAGES += \
+    vndk-sp \
+    vndk-sp-28
+
+# Name space configuration file for non-enforcing VNDK
+#PRODUCT_PACKAGES += \
+    ld.config.vndk_lite.txt
+
+PRODUCT_PACKAGES += \
+    ld.config.txt
+
+# Support for the O-MR1 devices
+PRODUCT_COPY_FILES += \
+    build/make/target/product/vndk/init.gsi.rc:system/etc/init/init.gsi.rc \
+    build/make/target/product/vndk/init.vndk-27.rc:system/etc/init/gsi/init.vndk-27.rc
+
+PRODUCT_EXTRA_VNDK_VERSIONS := 27
 
 # Include Vendor files
 $(call inherit-product, vendor/xiaomi/clover/clover-vendor.mk)
-
-# Set those variables here to overwrite the inherited values.
-PRODUCT_NAME := aosp_clover
-PRODUCT_DEVICE := clover
-PRODUCT_MODEL := Mi PAD 4 (AOSP)
-PRODUCT_BRAND := Xiaomi
-PRODUCT_MANUFACTURER := Xiaomi

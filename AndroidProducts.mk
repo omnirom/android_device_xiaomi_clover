@@ -21,6 +21,6 @@
 # definition file).
 #
 
-# inherit MI PAD 4 CarbonRom device config
+# inherit MI PAD 4 device config
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/carbon_clover.mk
+    $(LOCAL_DIR)/omni_clover.mk
