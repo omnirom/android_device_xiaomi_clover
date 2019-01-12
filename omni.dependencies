@@ -30,9 +30,5 @@
     "repository": "android_device_qcom_caf-sepolicy",
     "target_path": "device/qcom/sepolicy",
     "revision": "android-9.0"
-  },
- {
-   "repository": "android_device_xiaomi_sdm660-common",
-   "target_path": "device/xiaomi/sdm660-common"
- }
+  }
 ]

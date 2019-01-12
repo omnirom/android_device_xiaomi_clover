@@ -1,0 +1,2 @@
+allow adbd vendor_prop:file { getattr open read };
+

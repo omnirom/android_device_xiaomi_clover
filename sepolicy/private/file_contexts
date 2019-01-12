@@ -1,0 +1,4 @@
+/cust(/.*)?              u:object_r:custom_block_device:s0
+/dev/block/platform/soc/c0c4000.sdhci/by-name/cust u:object_r:custom_block_device:s0
+
+/firmware/firmware_mnt  u:object_r:rootfs:s0

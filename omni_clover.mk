@@ -35,7 +35,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 # must be before including omni part
 TARGET_BOOTANIMATION_SIZE := 1080p
 
-#DEVICE_PACKAGE_OVERLAYS += device/xiaomi/sdm660-common/overlay
 DEVICE_PACKAGE_OVERLAYS += device/xiaomi/clover/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/omni/overlay/CarrierConfig
 

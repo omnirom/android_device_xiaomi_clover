@@ -1,0 +1,2 @@
+#allow hal_keymaster_qti system_prop:file { getattr open read };
+

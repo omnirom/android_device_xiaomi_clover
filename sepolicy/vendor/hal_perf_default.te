@@ -1,0 +1,2 @@
+#allow hal_perf_default vendor_perf_prop:file { getattr open read };
+

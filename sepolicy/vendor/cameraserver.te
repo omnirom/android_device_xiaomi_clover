@@ -1,0 +1,2 @@
+allow cameraserver vendor_prop:file { getattr open read };
+

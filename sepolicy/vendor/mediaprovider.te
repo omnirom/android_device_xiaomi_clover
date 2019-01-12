@@ -1,0 +1,1 @@
+allow mediaprovider vendor_prop:file { getattr open read };

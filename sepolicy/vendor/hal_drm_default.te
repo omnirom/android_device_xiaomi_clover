@@ -1,0 +1,2 @@
+#allow hal_drm_default media_data_file:dir { add_name create write };
+#allow hal_drm_default media_data_file:file { create getattr open write };

@@ -1,0 +1,3 @@
+#allow bluetooth vendor_file:file { execute getattr open read };
+allow bluetooth vendor_prop:file { getattr open read };
+

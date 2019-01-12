@@ -1,0 +1,5 @@
+#============= init ==============
+allow init hwservicemanager:binder { call transfer };
+allow init btnvtool_exec:file execute;
+allow init sysfs_info:file read;
+

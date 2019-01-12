@@ -1,0 +1,2 @@
+allow platform_app vendor_prop:file { getattr open read };
+

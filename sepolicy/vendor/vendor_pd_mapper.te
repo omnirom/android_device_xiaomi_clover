@@ -1,0 +1,4 @@
+#allow vendor_pd_mapper default_prop:file { open read };
+allow vendor_pd_mapper vendor_firmware_file:dir { read open getattr };
+allow vendor_pd_mapper vendor_firmware_file:file { read open getattr };
+

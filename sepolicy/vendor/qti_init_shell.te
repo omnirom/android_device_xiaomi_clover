@@ -1,0 +1,22 @@
+allow qti_init_shell system_radio_prop:property_service set;
+allow qti_init_shell vendor_prop:file { getattr open read };
+allow qti_init_shell vendor_prop:property_service set;
+
+
+allow qti_init_shell bt_firmware_file:filesystem getattr;
+allow qti_init_shell cache_file:dir getattr;
+allow qti_init_shell firmware_file:filesystem getattr;
+allow qti_init_shell media_rw_data_file:dir getattr;
+allow qti_init_shell storage_file:dir getattr;
+allow qti_init_shell unlabeled:dir getattr;
+
+
+allow qti_init_shell debug_prop:property_service set;
+#allow qti_init_shell default_prop:property_service set;
+#allow qti_init_shell self:capability { dac_override dac_read_search };
+allow qti_init_shell sysfs:file setattr;
+allow qti_init_shell system_prop:property_service set;
+
+
+allow qti_init_shell vendor_radio_data_file:dir { read open search };
+

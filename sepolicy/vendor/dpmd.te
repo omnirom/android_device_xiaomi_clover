@@ -1,0 +1,6 @@
+#============= dpmd ==============
+#allow dpmd vendor_file:file { execute getattr open read };
+allow dpmd vendor_prop:property_service set;
+allow dpmd vendor_prop:file { getattr open read };
+
+

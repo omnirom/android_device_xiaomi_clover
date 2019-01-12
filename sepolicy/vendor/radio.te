@@ -1,0 +1,3 @@
+#============= radio ==============
+#allow radio vendor_file:file { execute getattr open read };
+allow radio vendor_prop:file { read getattr open };

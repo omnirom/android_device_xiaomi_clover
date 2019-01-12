@@ -1,0 +1,2 @@
+allow bootstat vendor_prop:file { getattr open read };
+

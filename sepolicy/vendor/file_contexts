@@ -1,0 +1,60 @@
+# HVDCP
+/sys/devices(/platform)?/soc/[a-z0-9]+\.i2c/i2c-[0-9]+/[0-9]+-[a-z0-9]+/[a-z0-9]+\.i2c:qcom,[a-z0-9]+@[a-z0-9]:qcom,smb[a-z0-9]+-parallel-slave@[0-9]+/power_supply/parallel(/.*)? u:object_r:sysfs_usb_supply:s0
+
+# Light HAL
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.xiaomi_clover u:object_r:hal_light_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.xiaomi_jasmine u:object_r:hal_light_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.xiaomi_wayne u:object_r:hal_light_default_exec:s0
+
+# Shell Script
+/(vendor|system/vendor)/bin/init\.goodix\.sh    u:object_r:init_fingerprint_exec:s0
+
+# Biometric
+/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.xiaomi_sdm660 u:object_r:hal_fingerprint_sdm660_exec:s0
+
+# For Goodix fingerprint
+/dev/goodix_fp*                                 u:object_r:fingerprint_device:s0
+
+# Goodix Fingerprint data
+/data/gf_data/frr_database.db                   u:object_r:fingerprint_data_file:s0
+/persist/data/gf*                               u:object_r:fingerprint_data_file:s0
+
+# USB HAL
+/(vendor|system/vendor)/bin/hw/android\.hardware\.usb@1\.0-service\.xiaomi_sdm660       u:object_r:hal_usb_default_exec:s0
+
+# IR
+/dev/spidev7.1                                  u:object_r:spidev_device:s0
+
+# Persist
+/persist/PRSensorData\.txt                      u:object_r:sensors_persist_file:s0
+
+#widevine1.0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.0-service.widevine   	u:object_r:hal_drm_widevine_exec:s0
+
+/dev/block/platform/soc/c0c4000\.sdhci/by-name/persist                          u:object_r:persist_block_device:s0
+/dev/block/platform/soc/c0c4000\.sdhci/by-name/cust                          u:object_r:custom_ab_block_device:s0
+/dev/block/platform/soc/c0c4000\.sdhci/by-name/bluetooth                          u:object_r:modem_block_device:s0
+/dev/block/platform/soc/c0c4000\.sdhci/by-name/modem                          u:object_r:modem_block_device:s0
+
+/dev/block/mmcblk0p64 u:object_r:custom_ab_block_device:s0
+/dev/block/mmcblk0p48 u:object_r:persist_block_device:s0
+/dev/block/mmcblk0p42 u:object_r:modem_block_device:s0
+/dev/block/mmcblk0p25 u:object_r:modem_block_device:s0
+
+
+/sys/devices/soc/ca00000\.qcom\,msm-cam/video4linux/video0/name              u:object_r:sysfs_graphics:s0
+
+# TODO(b/36764215): remove this file when the generic system image
+# no longer has these directories. They are specific to QCOM.
+# /
+/tombstones             u:object_r:rootfs:s0
+/dsp                    u:object_r:rootfs:s0
+
+# files in firmware
+/firmware(/.*)?         u:object_r:firmware_file:s0
+
+/sys/devices/platform/HardwareInfo/hw_id u:object_r:sysfs_info:s0
+
+/system/lib/modules/wlan\.ko    u:object_r:vendor_file:s0
+
+/sys/devices/soc/18800000\.qcom,icnss/net/wlan0/type u:object_r:sysfs_info:s0

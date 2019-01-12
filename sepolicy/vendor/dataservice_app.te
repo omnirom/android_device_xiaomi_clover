@@ -1,0 +1,2 @@
+allow dataservice_app vendor_prop:file { read open getattr };
+
