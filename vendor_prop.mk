@@ -1,4 +1,5 @@
 PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=libqti-perfd-client.so \
     persist.vendor.radio.custom_ecc=1 \
     persist.vendor.radio.rat_on=combine \
     persist.radio.schd.cache=3500 \
