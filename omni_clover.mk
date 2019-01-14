@@ -66,3 +66,7 @@ PRODUCT_CHARACTERISTICS := tablet
 
 TARGET_VENDOR := xiaomi
 
+VENDOR_SECURITY_PATCH := 2019-01-05
+
+$(call inherit-product, device/xiaomi/clover/vendor_prop.mk)
+
