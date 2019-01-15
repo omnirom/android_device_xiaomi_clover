@@ -153,15 +153,13 @@ on boot
 service per_mgr /vendor/bin/pm-service
     class core
     user system
-    group system net_raw
-    capabilities NET_BIND_SERVICE
+    group system
     ioprio rt 4
 
 service per_proxy /system/vendor/bin/pm-proxy
     class core
     user system
-    group system
-    capabilities NET_BIND_SERVICE
+    group system 
     disabled
 
 on property:init.svc.per_mgr=running
