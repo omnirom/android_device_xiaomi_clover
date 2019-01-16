@@ -246,8 +246,6 @@ persist.radio.multisim.config=ssss
 
 ro.com.android.mobiledata=false
 keyguard.no_require_sim=true
-vendor.display.enable_default_color_mode=1
-debug.sf.disable_hwc_vds=1
 
 vendor.qcom.bluetooth.soc=cherokee
 
