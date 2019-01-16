@@ -248,5 +248,7 @@ ro.com.android.mobiledata=false
 keyguard.no_require_sim=true
 
 vendor.qcom.bluetooth.soc=cherokee
+ro.hardware.power=clover
+
 
 

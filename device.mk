@@ -202,12 +202,14 @@ PRODUCT_PACKAGES += \
     fs_config_files
 
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl-qti \
-    android.hardware.gnss@1.0-service-qti \
+    android.hardware.gnss@1.1-impl-qti \
+    android.hardware.gnss@1.1-service-qti \
     libgnss \
     libgnsspps \
     libsensorndkbridge \
-    libvehiclenetwork-native
+    libloc_core \
+    libloc_pla_headers \
+    liblocation_api
 
 # Health
 PRODUCT_PACKAGES += \

@@ -1,0 +1,1 @@
+allow ueventd proc_touchscreen:file { relabelto };

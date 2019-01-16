@@ -4,9 +4,7 @@ allow qti_init_shell vendor_prop:property_service set;
 
 
 allow qti_init_shell bt_firmware_file:filesystem getattr;
-allow qti_init_shell cache_file:dir getattr;
 allow qti_init_shell firmware_file:filesystem getattr;
-allow qti_init_shell media_rw_data_file:dir getattr;
 allow qti_init_shell storage_file:dir getattr;
 allow qti_init_shell unlabeled:dir getattr;
 
