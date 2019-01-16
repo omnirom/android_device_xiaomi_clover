@@ -277,9 +277,6 @@ WIFI_HIDL_FEATURE_AWARE          := true
 #Enable DRM plugins 64 bit compilation
 TARGET_ENABLE_MEDIADRM_64 := true
 
-# DT2W
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/soc/c177000.i2c/i2c-3/3-0038/fts_gesture_mode"
-
 # Vendor init
 TARGET_INIT_VENDOR_LIB := libinit_clover
 TARGET_RECOVERY_DEVICE_MODULES := libinit_clover

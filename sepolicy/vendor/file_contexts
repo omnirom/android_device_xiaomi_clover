@@ -58,3 +58,5 @@
 /system/lib/modules/wlan\.ko    u:object_r:vendor_file:s0
 
 /sys/devices/soc/18800000\.qcom,icnss/net/wlan0/type u:object_r:sysfs_info:s0
+
+/proc/touchscreen/enable_dt2w    u:object_r:proc_touchpanel:s0

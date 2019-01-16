@@ -28,6 +28,7 @@
  */
 
 #define LOG_NIDEBUG 0
+#define DOUBLE_TAP_FILE "/proc/touchscreen/enable_dt2w"
 
 #include <errno.h>
 #include <string.h>
@@ -57,6 +58,13 @@ static int saved_interactive_mode = -1;
 static int slack_node_rw_failed = 0;
 static int display_hint_sent;
 int display_boost;
+
+void set_feature(struct power_module __unused *module, feature_t feature, int state) {
+    if (feature == POWER_FEATURE_DOUBLE_TAP_TO_WAKE) {
+        ALOGI("%s POWER_FEATURE_DOUBLE_TAP_TO_WAKE %s", __func__, (state ? "ON" : "OFF"));
+        sysfs_write(DOUBLE_TAP_FILE, state ? "1" : "0");
+    }
+}
 
 static int power_device_open(const hw_module_t* module, const char* name,
         hw_device_t** device);
@@ -473,7 +481,7 @@ static int power_device_open(const hw_module_t* module, const char* name,
                     dev->powerHint = power_hint;
                     dev->setInteractive = set_interactive;
                     /* At the moment we support 0.2 APIs */
-                    dev->setFeature = NULL,
+                    dev->setFeature = set_feature,
                         dev->get_number_of_platform_modes = NULL,
                         dev->get_platform_low_power_stats = NULL,
                         dev->get_voter_list = NULL,
@@ -506,4 +514,5 @@ struct power_module HAL_MODULE_INFO_SYM = {
     .init = power_init,
     .powerHint = power_hint,
     .setInteractive = set_interactive,
+    .setFeature = set_feature
 };
