@@ -28,19 +28,54 @@
 #
 
 MACADDRESS=/persist/wlan_mac.bin
-MACADDRESSVENDOR=/vendor/firmware/wlan/qca_cld/wlan_mac.bin
+MACADDRESSBAK=/persist/wlan_mac.backup
+MACADDRESSBIN=/persist/wlan_bt/wlan.mac
+INTFSTR0="Intf0MacAddress="
+INTFSTR1="Intf1MacAddress="
+INTFSTR2="Intf2MacAddress="
+INTFSTR3="Intf3MacAddress="
+MAC0=000AF58989FF
+MAC1=000AF58989FE
+MAC2=000AF58989FD
+MAC3=000AF58989FD
 
-# Mount vendor with read write permission
-mount -o remount,rw /vendor 
+get_mac () {
+  if [ -f $MACADDRESSBIN ]; then
+    realMac=$(printf "%b"  | od -An -t x1 -w6 -N6  $MACADDRESSBIN | tr -d '\n ')
+  else
+    checkMac=$(printf "%b"  | od -An -t x1 -w6 -N6  $MACADDRESS | tr -d '\n ')
+    if [ $checkMac != $MAC0 ]; then
+      realMac=$checkMac
+    fi
+  fi
+}
 
-# Remove old wlan_mac.bin file in vendor
-rm -f /vendor/firmware/wlan/qca_cld/wlan_mac.bin
+wlan_mac () {
+    wlanMac=$(head -n 1 $MACADDRESS)
+    wlanMac=$(echo -e "${wlanMac//$INTFSTR0}")
+}
 
-# Read out  WiFi Mac Address
-macaddr=$(printf "%b"  | od -An -t x1 -w6 -N6  $MACADDRESS | tr -d '\n ')
+write_mac () {
+        cp $MACADDRESS $MACADDRESSBAK
+        rm -f $MACADDRESS
+        echo -e  "$INTFSTR0""$realMac" >$MACADDRESS
+        echo -e  "$INTFSTR1""$MAC1" >>$MACADDRESS
+        echo -e  "$INTFSTR2""$MAC2" >>$MACADDRESS
+        echo -e  "$INTFSTR3""$MAC3" "\nEND">>$MACADDRESS
+        chown wifi $MACADDRESS
+        chgrp wifi $MACADDRESS
+}
 
-# Write new Mac Adress in Vendor
-echo -e  "Intf0MacAddress=$macaddr" "\nEND">$MACADDRESSVENDOR
-
-# Mount vendor with read only permission
-mount -o remount,ro /vendor
+if [ -f $MACADDRESSBAK ]; then
+    get_mac
+    wlan_mac
+    if [ "${realMac:0:6}" == "${wlanMac:0:6}" ]; then
+        exit 1
+    else
+        get_mac
+        write_mac
+    fi
+else
+    get_mac
+    write_mac
+fi
