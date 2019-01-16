@@ -8,4 +8,3 @@ allow priv_app sysfs_android_usb:file open;
 
 allow priv_app sysfs:file { open getattr read };
 allow priv_app sysfs_info:file { open getattr read };
-
