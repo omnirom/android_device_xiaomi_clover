@@ -279,7 +279,7 @@ PRODUCT_PACKAGES += \
     libjson
 
 # XiaomiParts
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     XiaomiParts
 
 # RCS

@@ -15,7 +15,7 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
-package org.omnirom.settings.device;
+package org.omnirom.device;
 
 import android.os.Bundle;
 import android.os.SystemProperties;
