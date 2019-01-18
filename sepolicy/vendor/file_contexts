@@ -53,7 +53,7 @@
 # files in firmware
 /firmware(/.*)?         u:object_r:firmware_file:s0
 
-/sys/devices/platform/HardwareInfo/hw_id u:object_r:sysfs_info:s0
+/sys/devices/platform/HardwareInfo(/.*)? u:object_r:sysfs_info:s0
 
 /system/lib/modules/wlan\.ko    u:object_r:vendor_file:s0
 
