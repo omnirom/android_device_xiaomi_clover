@@ -27,6 +27,12 @@
   },
   {
     "remote": "omnirom",
+    "repository": "android_vendor_qcom_opensource_dataservices",
+    "target_path": "vendor/qcom/opensource/dataservices",
+    "revision": "android-9.0"
+  },
+  {
+    "remote": "omnirom",
     "repository": "android_hardware_qcom_media-caf-sdm660",
     "target_path": "hardware/qcom/media-caf-sdm660",
     "revision": "android-9.0"
