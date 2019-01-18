@@ -43,9 +43,13 @@ get_mac () {
   if [ -f $MACADDRESSBIN ]; then
     realMac=$(printf "%b"  | od -An -t x1 -w6 -N6  $MACADDRESSBIN | tr -d '\n ')
   else
-    checkMac=$(printf "%b"  | od -An -t x1 -w6 -N6  $MACADDRESS | tr -d '\n ')
-    if [ $checkMac != $MAC0 ]; then
-      realMac=$checkMac
+    if [ -f $MACADDRESS ]; then
+        checkMac=$(printf "%b"  | od -An -t x1 -w6 -N6  $MACADDRESS | tr -d '\n ')
+        if [ $checkMac != $MAC0 ]; then
+          realMac=$checkMac
+        fi
+    else
+        realMac=$MAC0
     fi
   fi
 }
