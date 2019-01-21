@@ -27,7 +27,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-MACADDRESS=/persist/wlan_mac.bin
+OMNIADDRESS=/persist/wlan_mac.omni
+WLAN_MAC_BIN=/persist/wlan_mac.bin
 MACADDRESSBAK=/persist/wlan_mac.backup
 MACADDRESSBIN=/persist/wlan_bt/wlan.mac
 INTFSTR0="Intf0MacAddress="
@@ -43,9 +44,9 @@ get_mac () {
   if [ -f $MACADDRESSBIN ]; then
     realMac=$(printf "%b"  | od -An -t x1 -w6 -N6  $MACADDRESSBIN | tr -d '\n ')
   else
-    if [ -f $MACADDRESS ]; then
+    if [ -f $WLAN_MAC_BIN ]; then
         checkMac=$(printf "%b"  | od -An -t x1 -w6 -N6  $MACADDRESS | tr -d '\n ')
-        if [ $checkMac != $MAC0 ]; then
+        if [ $checkMac != $MAC0 ] && [ "${checkMac:0:2}" != "49" ]; then
           realMac=$checkMac
         fi
     else
@@ -60,20 +61,20 @@ wlan_mac () {
 }
 
 write_mac () {
-        cp $MACADDRESS $MACADDRESSBAK
-        rm -f $MACADDRESS
-        echo -e  "$INTFSTR0""$realMac" >$MACADDRESS
-        echo -e  "$INTFSTR1""$MAC1" >>$MACADDRESS
-        echo -e  "$INTFSTR2""$MAC2" >>$MACADDRESS
-        echo -e  "$INTFSTR3""$MAC3" "\nEND">>$MACADDRESS
-        chown wifi $MACADDRESS
-        chgrp wifi $MACADDRESS
+        cp $WLAN_MAC_BIN $MACADDRESSBAK
+        rm -f $OMNIADDRESS
+        echo -e  "$INTFSTR0""$realMac" >$OMNIADDRESS
+        echo -e  "$INTFSTR1""$MAC1" >>$OMNIADDRESS
+        echo -e  "$INTFSTR2""$MAC2" >>$OMNIADDRESS
+        echo -e  "$INTFSTR3""$MAC3" "\nEND">>$OMNIADDRESS
+        chown wifi $OMNIADDRESS
+        chgrp wifi $OMNIADDRESS
 }
 
 if [ -f $MACADDRESSBAK ]; then
     get_mac
     wlan_mac
-    if [ "${realMac:0:6}" == "${wlanMac:0:6}" ]; then
+    if [ "${realMac:0:6}" == "${wlanMac:0:6}" ] && [ "${wlanMac:0:2}" != "49" ]; then
         exit 1
     else
         get_mac
