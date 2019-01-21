@@ -27,8 +27,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-MACADDRESS=/persist/wlan_mac.bin
-MACADDRESSBAK=/persist/wlan_mac.backup
+CLOVERMAC=/persist/wlan_mac.clover
+WLAN_MAC_BIN=/persist/wlan_mac.bin
 MACADDRESSBIN=/persist/wlan_bt/wlan.mac
 INTFSTR0="Intf0MacAddress="
 INTFSTR1="Intf1MacAddress="
@@ -43,9 +43,9 @@ get_mac () {
   if [ -f $MACADDRESSBIN ]; then
     realMac=$(printf "%b"  | od -An -t x1 -w6 -N6  $MACADDRESSBIN | tr -d '\n ')
   else
-    if [ -f $MACADDRESS ]; then
+    if [ -f $WLAN_MAC_BIN ]; then
         checkMac=$(printf "%b"  | od -An -t x1 -w6 -N6  $MACADDRESS | tr -d '\n ')
-        if [ $checkMac != $MAC0 ]; then
+        if [ $checkMac != $MAC0 ] && [ "${checkMac:0:2}" != "49" ]; then
           realMac=$checkMac
         fi
     else
@@ -55,25 +55,23 @@ get_mac () {
 }
 
 wlan_mac () {
-    wlanMac=$(head -n 1 $MACADDRESS)
+    wlanMac=$(head -n 1 $CLOVERMAC)
     wlanMac=$(echo -e "${wlanMac//$INTFSTR0}")
 }
 
 write_mac () {
-        cp $MACADDRESS $MACADDRESSBAK
-        rm -f $MACADDRESS
-        echo -e  "$INTFSTR0""$realMac" >$MACADDRESS
-        echo -e  "$INTFSTR1""$MAC1" >>$MACADDRESS
-        echo -e  "$INTFSTR2""$MAC2" >>$MACADDRESS
-        echo -e  "$INTFSTR3""$MAC3" "\nEND">>$MACADDRESS
-        chown wifi $MACADDRESS
-        chgrp wifi $MACADDRESS
+        echo -e  "$INTFSTR0""$realMac" >$CLOVERMAC
+        echo -e  "$INTFSTR1""$MAC1" >>$CLOVERMAC
+        echo -e  "$INTFSTR2""$MAC2" >>$CLOVERMAC
+        echo -e  "$INTFSTR3""$MAC3" "\nEND">>$CLOVERMAC
+        chown wifi $CLOVERMAC
+        chgrp wifi $CLOVERMAC
 }
 
-if [ -f $MACADDRESSBAK ]; then
+if [ -f $CLOVERMAC ]; then
     get_mac
     wlan_mac
-    if [ "${realMac:0:6}" == "${wlanMac:0:6}" ]; then
+    if [ "${realMac:0:6}" == "${wlanMac:0:6}" ] && [ "${wlanMac:0:2}" != "49" ]; then
         exit 1
     else
         get_mac
