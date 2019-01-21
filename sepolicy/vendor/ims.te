@@ -1,0 +1,2 @@
+allow ims vendor_prop:file { read open getattr };
+
