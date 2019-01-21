@@ -2281,13 +2281,11 @@ case "$target" in
             echo 1 > /proc/sys/kernel/sched_restrict_cluster_spill
             echo 100000 > /proc/sys/kernel/sched_short_burst_ns
             echo 1 > /proc/sys/kernel/sched_prefer_sync_wakee_to_waker
+            echo 20 > /proc/sys/kernel/sched_small_wakee_task_load
 
             # cpuset settings
-            echo 0-7 > /dev/cpuset/top-app/cpus
-            echo 4-7 > /dev/cpuset/foreground/boost/cpus
-            echo 0-2,4-7 > /dev/cpuset/foreground/cpus
-            echo 0-1 > /dev/cpuset/background/cpus
-            echo 0-2 > /dev/cpuset/system-background/cp
+            echo 0-3 > /dev/cpuset/background/cpus
+            echo 0-3 > /dev/cpuset/system-background/cpus
 
             # disable thermal bcl hotplug to switch governor
             echo 0 > /sys/module/msm_thermal/core_control/enabled
@@ -2356,10 +2354,6 @@ case "$target" in
             # re-enable thermal and BCL hotplug
             echo 1 > /sys/module/msm_thermal/core_control/enabled
 
-            # Support touch boost
-            echo "0:1401600" > /sys/module/cpu_boost/parameters/input_boost_freq
-            echo 60 > /sys/module/cpu_boost/parameters/input_boost_ms
-
             # Set Memory parameters
             configure_memory_parameters
 
@@ -2392,11 +2386,23 @@ case "$target" in
                 echo 400 > $memlat/mem_latency/ratio_ceil
             done
             echo "cpufreq" > /sys/class/devfreq/soc:qcom,mincpubw/governor
+
+            # Start cdsprpcd only for sdm660 and disable for sdm630
+            if [ "$soc_id" -eq "317" ]; then
+                start vendor.cdsprpcd
+            fi
+
+            # Start Host based Touch processing
+                case "$hw_platform" in
+                        "MTP" | "Surf" | "RCM" | "QRD" )
+                        start_hbtp
+                        ;;
+                esac
             ;;
         esac
-        #Apply settings for sdm630
+        #Apply settings for sdm630 and Tahaa
         case "$soc_id" in
-            "318" | "327" )
+            "318" | "327" | "385" )
 
             # Start Host based Touch processing
             case "$hw_platform" in
