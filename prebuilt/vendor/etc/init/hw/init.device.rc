@@ -40,6 +40,9 @@ on boot
     chown system system /proc/touchscreen/enable_dt2w
     chmod 0660 /proc/touchscreen/enable_dt2w
 	
+    # default country code
+    setprop ro.boot.wificountrycode 00
+
 service macaddress_setup /vendor/bin/sh /vendor/bin/init.macaddress_setup.sh
    class main
    user root
