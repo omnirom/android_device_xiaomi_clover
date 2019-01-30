@@ -281,7 +281,8 @@ PRODUCT_PACKAGES += \
 
 # XiaomiParts
 PRODUCT_PACKAGES += \
-    XiaomiParts
+    XiaomiParts \
+    OmniDisplayManager
 
 # RCS
 PRODUCT_PACKAGES += \
