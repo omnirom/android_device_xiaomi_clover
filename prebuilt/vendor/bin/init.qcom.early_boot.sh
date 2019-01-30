@@ -336,17 +336,17 @@ if [ -f /firmware/verinfo/ver_info.txt ]; then
   zygote=`getprop ro.zygote` 
   case "$zygote" in 
   "zygote64_32") 
-    if [ "$modem" \< "3.1" ]; then 
-      setprop vendor.rild.libpath "/vendor/lib64/libril-qc-qmi-1.so" 
+    if [ "$modem" = "3.1" ]; then
+      setprop vendor.rild.libpath "/vendor/lib64/libril-qc-qmi-1.so"
     else 
-      setprop vendor.rild.libpath "/vendor/lib64/libril-qc-hal-qmi.so" 
+      setprop vendor.rild.libpath "/vendor/lib64/libril-qc-hal-qmi.so"
     fi
     ;; 
   "zygote32") 
-    if [ "$modem" \< "3.1" ]; then 
-      setprop vendor.rild.libpath "/vendor/lib/libril-qc-qmi-1.so" 
+    if [ "$modem" = "3.1" ]; then
+      setprop vendor.rild.libpath "/vendor/lib/libril-qc-qmi-1.so"
     else 
-      setprop vendor.rild.libpath "/vendor/lib/libril-qc-hal-qmi.so" 
+      setprop vendor.rild.libpath "/vendor/lib/libril-qc-hal-qmi.so"
     fi
     ;;
    esac 
@@ -367,14 +367,14 @@ if [ -f /firmware/verinfo/ver_info.txt ]; then
             zygote=`getprop ro.zygote`
             case "$zygote" in
                 "zygote64_32")
-                    if [ "$version" \< "3.1" ]; then
+                    if [ "$version" = "3.1" ]; then
                         setprop vendor.rild.libpath "/vendor/lib64/libril-qc-qmi-1.so"
                     else
                         setprop vendor.rild.libpath "/vendor/lib64/libril-qc-hal-qmi.so"
                     fi
                     ;;
                 "zygote32")
-                    if [ "$version" \< "3.1" ]; then
+                    if [ "$version" = "3.1" ]; then
                         echo "legacy qmi load for TA less than 3.1"
                         setprop vendor.rild.libpath "/vendor/lib/libril-qc-qmi-1.so"
                     else

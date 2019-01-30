@@ -76,3 +76,4 @@ persist.vendor.usb.config.extra  u:object_r:vendor_prop:s0
 ro.alarm_boot  u:object_r:vendor_prop:s0
 ro.gpu.available_frequencies  u:object_r:vendor_prop:s0
 ro.vendor.radio.noril  u:object_r:vendor_prop:s0
+ro.radio.noril  u:object_r:vendor_prop:s0

@@ -37,7 +37,7 @@ qcrild_status=true
 
 case "$baseband" in
     "apq" | "sda" | "qcs" )
-    setprop ro.vendor.radio.noril yes
+    setprop ro.radio.noril yes
     stop ril-daemon
     stop vendor.ril-daemon
     stop vendor.qcrild
@@ -67,7 +67,7 @@ case "$baseband" in
                     sed -n 's/^[^:]*modem[^:]*:[[:blank:]]*//p' |
                     sed 's/.*AT.\(.*\)/\1/g' | cut -d \- -f 1`
             if [ ! -z $version ]; then
-                if [ "$version" \< "3.1" ]; then
+                if [ "$version" = "3.1" ]; then
                     qcrild_status=false
                 fi
             fi
@@ -76,7 +76,7 @@ case "$baseband" in
                     sed -n 's/^[^:]*modem[^:]*:[[:blank:]]*//p' |
                     sed 's/.*TA.\(.*\)/\1/g' | cut -d \- -f 1`
             if [ ! -z $version ]; then
-                if [ "$version" \< "3.0" ]; then
+                if [ "$version" = "3.1" ]; then
                     qcrild_status=false
                 fi
             fi
